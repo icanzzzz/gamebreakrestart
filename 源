@@ -1,0 +1,28 @@
+//glyph似乎屏蔽了此类sendmessage消息无法使用。
+
+
+#include<stdio.h>
+#include<Windows.h>
+//项目属性里更改字符集为多字节字符集
+
+int main()
+{
+	HWND gameface,startface;
+	int n = 0;
+	startface = FindWindow("Qt5QWindowIcon", "Glyph");//获取启动界面
+	while (1)
+	{
+		gameface = FindWindow("SDL_app", "Trove");//获取窗口
+		if (gameface == NULL)
+		{
+			//指定坐标鼠标左击
+			SendMessage(startface, WM_LBUTTONDOWN, 0, MAKELPARAM(860, 110));
+			Sleep(100);
+			SendMessage(startface, WM_LBUTTONUP, 0, MAKELPARAM(860, 110));
+			n++;
+			printf("已重启%d\n",n);
+		}
+		Sleep(1000);
+	}
+	return 0;
+}
